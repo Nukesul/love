@@ -93,6 +93,11 @@ opacity:1;
 transform:none;
 transition-delay:1.2s;
 }
+section.show > *:nth-child(5) {
+opacity:1;
+transform:none;
+transition-delay:1.5s;
+}
 
 /* breathing animation for key elements, softer */
 h1, p, .card, .secret-btn {
@@ -395,6 +400,26 @@ footer.show{opacity:.75;}
     transform: translateY(-150vh) translateX(var(--tx)) rotate(var(--rot)) scale(1.2);
   }
 }
+
+/* NEW: Gallery styles */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
+  max-width: 800px;
+}
+.gallery img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  filter: drop-shadow(0 0 15px rgba(255,200,255,.4));
+}
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0,0,0,.6);
+}
 </style>
 </head>
 
@@ -446,6 +471,21 @@ footer.show{opacity:.75;}
 такая настоящая, такая близкая сердцу.
 </p>
 <button class="secret-btn">Хочу шепнуть тебе 💜</button>
+</section>
+
+<section>
+<h1>Наши любимые котики 💜</h1>
+<p>
+Вот несколько милых фото наших пушистых друзей, которые всегда поднимают настроение и напоминают о нашей нежной cats.
+</p>
+<div class="gallery">
+  <img src="./photos/one.jpg" alt="Милый котик 1">
+  <img src="./photos/two.jpg" alt="Милый котик 2">
+  <img src="./photos/three.jpg" alt="Милый котик 3">
+  <img src="./photos/four.jpg" alt="Милый котик 4">
+  <img src="./photos/five.jpg" alt="Милый котик 5">
+  <img src="./photos/six.jpg" alt="Милый котик 6">
+</div>
 </section>
 
 <footer>
