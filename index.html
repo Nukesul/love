@@ -331,6 +331,70 @@ transition:opacity 0.45s ease-in-out;
 
 footer{padding:120px 20px;text-align:center;opacity:.75;font-size:20px;transition:opacity 1.2s ease-in-out;}
 footer.show{opacity:.75;}
+
+/* NEW: Heart particle styles for animations on interactions */
+.heart-particle {
+  position: absolute;
+  font-size: 24px;
+  pointer-events: none;
+  animation: floatUp 2s ease-in-out forwards;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 10px rgba(255, 200, 255, 0.8));
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0); opacity: 0.8; }
+  50% { transform: translateY(-50px) rotate(15deg); opacity: 1; }
+  100% { transform: translateY(-100px) rotate(30deg); opacity: 0; }
+}
+
+/* NEW: Ripple effect for buttons and interactive elements */
+.ripple {
+  position: absolute;
+  background: rgba(255, 200, 255, 0.3);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: rippleAnim 0.6s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+/* NEW: Pulse glow on hover for interactive elements */
+.cat:hover, .secret-btn:hover, .close-btn:hover, #musicToggle:hover, .yes:hover, .no:hover {
+  animation: pulseGlow 1.5s infinite alternate;
+}
+@keyframes pulseGlow {
+  0% { filter: drop-shadow(0 0 25px rgba(255,200,255,.65)); }
+  100% { filter: drop-shadow(0 0 40px rgba(255,200,255,1)); }
+}
+
+/* NEW: Particle styles for scroll animation */
+.particle {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  text-shadow: 0 0 10px rgba(255, 200, 255, 0.8);
+  opacity: 0;
+  z-index: -1;
+  --tx: 0px;
+  --rot: 0deg;
+  animation: particleFloat 8s ease-out forwards;
+}
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+  }
+  20% {
+    opacity: 0.7;
+    transform: translateY(-20px) translateX(calc(var(--tx) * 0.2)) rotate(calc(var(--rot) * 0.2)) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-150vh) translateX(var(--tx)) rotate(var(--rot)) scale(1.2);
+  }
+}
 </style>
 </head>
 
@@ -343,10 +407,10 @@ footer.show{opacity:.75;}
   <div class="box">
     <p style="font-size:22px">
       Хочешь, я включу<br>
-      тихую музыку для настроения? ✨
+      нежную музыку, чтобы создать волшебную атмосферу для нас? ✨
     </p>
     <button class="yes">Да, включи 🎧</button>
-    <button class="no">Потом</button>
+    <button class="no">Позже</button>
   </div>
 </div>
 
@@ -355,57 +419,57 @@ footer.show{opacity:.75;}
 <section>
 <h1>Айгерим 💜</h1>
 <p>
-Рад видеть тебя здесь.<br>
-С тобой мир становится теплее и мягче.
+Я так рад видеть тебя здесь, моя дорогая.<br>
+С тобой мир наполняется теплом и нежностью, словно мягкий свет луны.
 </p>
 <div class="card">
 <p>
-Это тихое место —<br>
-немного о чувствах.<br>
-И немного о нас двоих.
+Это уютное уголок, созданный для наших чувств,<br>
+где каждый миг говорит о нашей любви<br>
+и о той особенной связи между нами.
 </p>
 </div>
 </section>
 
 <section>
-<h1>Она и котик</h1>
-<p>Нажми на него. Сначала он осторожный, как и ты иногда.</p>
+<h1>Ты и милый котик</h1>
+<p>Прикоснись к нему нежно. Сначала он робкий и осторожный, как твои первые шаги в любви.</p>
 <div class="cat">🐱</div>
 <div id="mood"></div>
 </section>
 
 <section>
-<h1>И если честно...</h1>
+<h1>И если откровенно...</h1>
 <p>
-Я не идеализирую тебя.<br>
-Мне просто нравится —<br>
-какая ты настоящая.
+Я не пытаюсь идеализировать тебя, моя любимая.<br>
+Мне просто нравится каждое мгновение с тобой —<br>
+такая настоящая, такая близкая сердцу.
 </p>
-<button class="secret-btn">Хочу сказать 💜</button>
+<button class="secret-btn">Хочу шепнуть тебе 💜</button>
 </section>
 
 <footer>
-Твой Нурсултан<br>
-и шепот ночи ✨
+Твой преданный Нурсултан<br>
+и нежный шепот звездной ночи ✨
 </footer>
 
 <div id="wow"><div class="heart">💜</div></div>
 
 <div id="secret">
-<h1>Айгерим</h1>
+<h1>Айгерим, моя радость</h1>
 <p>
-Иногда ты капризничаешь — и это так мило.<br><br>
-Даже когда молчишь — я слышу твои мысли.<br><br>
-А когда улыбаешься — мир замирает.
+Иногда ты капризничаешь — и это так трогательно и мило, что мое сердце тает.<br><br>
+Даже в твоем молчании я чувствую тепло твоих мыслей, они обнимают меня.<br><br>
+А когда ты улыбаешься — весь мир замирает в восхищении, и я теряюсь в твоих глазах.
 </p>
-<button class="close-btn">бумм</button>
+<button class="close-btn">Сердце бьется</button>
 </div>
 
 <div id="final">
 <p>
-Если вдруг сомневаешься —<br><br>
-<strong>я выбираю тебя.</strong><br>
-Спокойно. Искренне. Без лишних слов.
+Если когда-то усомнишься в нас —<br><br>
+<strong>я всегда выбираю тебя.</strong><br>
+С тихой нежностью, искренне, без лишних слов, навсегда.
 </p>
 </div>
 
@@ -420,26 +484,57 @@ new IntersectionObserver(e=>{
 if(e[0].isIntersecting) footer.classList.add('show');
 },{threshold:.1}).observe(footer);
 
+/* NEW: Function to create heart particles on interaction */
+function createHearts(x, y, count = 5) {
+  for (let i = 0; i < count; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart-particle';
+    heart.textContent = '💜';
+    heart.style.left = `${x + Math.random() * 20 - 10}px`;
+    heart.style.top = `${y + Math.random() * 20 - 10}px`;
+    heart.style.animationDelay = `${Math.random() * 0.5}s`;
+    heart.style.animationDuration = `${1.5 + Math.random()}s`;
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2500);
+  }
+}
+
+/* NEW: Function to create ripple effect on click */
+function createRipple(event, element) {
+  const ripple = document.createElement('div');
+  ripple.className = 'ripple';
+  const rect = element.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.width = ripple.style.height = `${size}px`;
+  ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+  ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+  element.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+}
+
 /* CAT */
 const cat=document.querySelector('.cat');
 const mood=document.getElementById('mood');
 let clicks=0;
 const moods=[
-"Ты иногда вредничаешь — и мне это нравится",
-"Ты милая, даже когда злишься",
-"Ты чувствуешь глубже, чем показываешь",
-"Ты особенная, как никто другой",
-"Я привык к тебе — и это счастье"
+"Ты иногда капризничаешь — и это так трогательно, что мое сердце наполняется теплом",
+"Ты такая милая, даже в моменты гнева, и это делает тебя еще ближе",
+"Ты чувствуешь все так глубоко, и это делает нашу связь особенной и теплой",
+"Ты уникальная, как звезда на небе, и я ценю каждую твою черту",
+"Я привык к тебе — и это самое нежное счастье в моей жизни"
 ];
-cat.onclick=()=>{
-clicks++;
-const f=document.createElement('div');
-f.className='flash';
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),700);
-mood.textContent=moods[Math.min(clicks-1,moods.length-1)];
-mood.classList.add('show');
-if(clicks>3) cat.textContent="😺";
+cat.onclick=(e)=>{
+  clicks++;
+  const f=document.createElement('div');
+  f.className='flash';
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),700);
+  mood.textContent=moods[Math.min(clicks-1,moods.length-1)];
+  mood.classList.add('show');
+  if(clicks>3) cat.textContent="😺";
+  // NEW: Add hearts and ripple on cat click
+  createHearts(e.clientX, e.clientY, 8);
+  createRipple(e, cat);
 };
 
 /* wow / secret / final */
@@ -449,18 +544,28 @@ const secret=document.getElementById('secret');
 const close=document.querySelector('.close-btn');
 const final=document.getElementById('final');
 
-btn.onclick=()=>{
-wow.classList.add('show');
-setTimeout(()=>{
-wow.classList.remove('show');
-secret.classList.add('show');
-},1600);
+btn.onclick=(e)=>{
+  wow.classList.add('show');
+  setTimeout(()=>{
+    wow.classList.remove('show');
+    secret.classList.add('show');
+  },1600);
+  // NEW: Add hearts and ripple on secret button click
+  createHearts(e.clientX, e.clientY, 10);
+  createRipple(e, btn);
 };
-close.onclick=()=>{
-secret.classList.remove('show');
-setTimeout(()=>final.classList.add('show'),800);
+close.onclick=(e)=>{
+  secret.classList.remove('show');
+  setTimeout(()=>final.classList.add('show'),800);
+  // NEW: Add hearts and ripple on close button click
+  createHearts(e.clientX, e.clientY, 6);
+  createRipple(e, close);
 };
-final.onclick=()=>final.classList.remove('show');
+final.onclick=(e)=>{
+  final.classList.remove('show');
+  // NEW: Add hearts on final click
+  createHearts(e.clientX, e.clientY, 12);
+};
 
 /* MUSIC */
 const music=document.getElementById('bgMusic');
@@ -470,26 +575,60 @@ const no=document.querySelector('.no');
 const toggle=document.getElementById('musicToggle');
 let playing=false;
 
-yes.onclick=()=>{
-music.volume=.25;
-music.play();
-playing=true;
-modal.style.display='none';
+yes.onclick=(e)=>{
+  music.volume=.25;
+  music.play();
+  playing=true;
+  modal.style.display='none';
+  // NEW: Add hearts and ripple on yes button
+  createHearts(e.clientX, e.clientY, 5);
+  createRipple(e, yes);
 };
-no.onclick=()=>modal.style.display='none';
+no.onclick=(e)=>{
+  modal.style.display='none';
+  // NEW: Add ripple on no button (fewer hearts for "no")
+  createHearts(e.clientX, e.clientY, 2);
+  createRipple(e, no);
+};
 
-toggle.onclick=()=>{
-if(!playing){
-music.play();
-playing=true;
-}else{
-music.pause();
-playing=false;
-}
+toggle.onclick=(e)=>{
+  if(!playing){
+    music.play();
+    playing=true;
+  }else{
+    music.pause();
+    playing=false;
+  }
+  // NEW: Add hearts and ripple on music toggle
+  createHearts(e.clientX, e.clientY, 4);
+  createRipple(e, toggle);
 };
 
 // Fade in music modal smoothly (already has transition)
 setTimeout(()=>modal.classList.add('show'), 300);
+
+/* NEW: Particle animation on scroll */
+let lastScrollTime = 0;
+window.addEventListener('scroll', () => {
+  const now = Date.now();
+  if (now - lastScrollTime > 100) { // Throttle to every 100ms
+    lastScrollTime = now;
+    const count = Math.floor(Math.random() * 3 + 2); // 2 to 4 particles
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = '💜';
+      p.style.left = `${Math.random() * 100}vw`;
+      p.style.top = `${window.scrollY + window.innerHeight}px`;
+      p.style.fontSize = `${10 + Math.random() * 15}px`;
+      p.style.animationDuration = `${4 + Math.random() * 6}s`;
+      p.style.setProperty('--tx', `${Math.random() * 100 - 50}px`);
+      p.style.setProperty('--rot', `${Math.random() * 360}deg`);
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 10000);
+    }
+  }
+});
 </script>
 
 </body>
