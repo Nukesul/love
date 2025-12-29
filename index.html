@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Айгерим 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:'Inter',sans-serif;
+background:linear-gradient(180deg,#050014,#14002e);
+color:#f6f0ff;
+overflow-x:hidden;
+}
+
+/* enhanced glow background for atmosphere */
+body::before{
+content:'';
+position:fixed;
+inset:-20%;
+background:
+radial-gradient(circle at 30% 20%,rgba(180,120,255,.18),transparent 40%),
+radial-gradient(circle at 70% 80%,rgba(255,180,220,.15),transparent 45%),
+radial-gradient(circle at 50% 50%,rgba(150,100,200,.12),transparent 50%);
+animation:glowMove 18s ease-in-out infinite alternate;
+z-index:-1;
+filter:blur(10px);
+}
+@keyframes glowMove{
+0%{transform:scale(1) translate(0,0);}
+50%{transform:scale(1.05) translate(5%, 3%);}
+100%{transform:scale(1.1) translate(-3%, 5%);}
+}
+
+/* subtle starry glow for atmosphere */
+body::after{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle,transparent 80%,rgba(0,0,0,.8)),
+url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="10" cy="10" r="1" fill="white" opacity="0.3"/><circle cx="30" cy="50" r="0.8" fill="white" opacity="0.2"/><circle cx="70" cy="20" r="1.2" fill="white" opacity="0.25"/><circle cx="50" cy="80" r="0.9" fill="white" opacity="0.35"/><circle cx="90" cy="60" r="0.7" fill="white" opacity="0.15"/></svg>') repeat;
+opacity:0.08;
+animation:twinkle 20s ease-in-out infinite alternate;
+z-index:-1;
+}
+@keyframes twinkle{
+to{opacity:0.12;}
+}
+
+/* sections */
+section{
+min-height:100vh;
+padding:90px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+opacity:0;
+transform:translateY(40px);
+transition:opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+section.show{opacity:1;transform:none}
+
+/* elements inside sections with staggered animations */
+section > * {
+opacity:0;
+transform:translateY(20px);
+transition:opacity 1.0s cubic-bezier(0.22, 1, 0.36, 1), transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
+}
+section.show > *:nth-child(1) {
+opacity:1;
+transform:none;
+transition-delay:0.3s;
+}
+section.show > *:nth-child(2) {
+opacity:1;
+transform:none;
+transition-delay:0.6s;
+}
+section.show > *:nth-child(3) {
+opacity:1;
+transform:none;
+transition-delay:0.9s;
+}
+section.show > *:nth-child(4) {
+opacity:1;
+transform:none;
+transition-delay:1.2s;
+}
+
+/* breathing animation for key elements, softer */
+h1, p, .card, .secret-btn {
+animation: breathe 5s ease-in-out infinite alternate;
+}
+@keyframes breathe {
+0% {opacity: 0.92; transform:scale(0.99);}
+100% {opacity: 1; transform:scale(1);}
+}
+
+h1{
+font-family:'Pacifico';
+font-size:clamp(38px,6vw,56px);
+margin-bottom:22px;
+text-shadow:0 0 25px rgba(190,150,255,.75), 0 0 5px rgba(255,255,255,0.35);
+}
+
+p{
+font-size:clamp(18px,3.5vw,24px);
+max-width:720px;
+line-height:1.8;
+text-shadow:0 0 5px rgba(255,255,255,0.28), 0 0 3px rgba(190,150,255,0.25);
+}
+
+/* card */
+.card{
+margin:45px 0;
+padding:34px;
+border-radius:36px;
+background:rgba(255,255,255,.07);
+backdrop-filter:blur(14px);
+box-shadow:0 25px 70px rgba(0,0,0,.6);
+transition:box-shadow 0.7s ease-in-out, transform 0.7s ease-in-out;
+}
+.card:hover {
+box-shadow:0 35px 85px rgba(0,0,0,.7);
+transform:translateY(-6px);
+}
+
+/* CAT */
+.cat{
+font-size:92px;
+cursor:pointer;
+margin:30px 0;
+transition:transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+filter:drop-shadow(0 0 25px rgba(255,200,255,.65));
+}
+.cat:active{transform:scale(.95)}
+
+#mood{
+margin-top:22px;
+font-size:22px;
+opacity:0;
+transform:translateY(10px);
+transition:opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+max-width:560px;
+}
+#mood.show{opacity:1;transform:none}
+
+/* flash */
+.flash{
+position:fixed;inset:0;
+background:radial-gradient(circle,rgba(255,200,255,.48),transparent 60%);
+animation:flash .7s cubic-bezier(0.22, 1, 0.36, 1);
+pointer-events:none;
+z-index:25;
+}
+@keyframes flash{to{opacity:0}}
+
+/* button */
+.secret-btn{
+margin-top:45px;
+padding:18px 52px;
+border-radius:50px;
+border:none;
+font-size:22px;
+font-family:'Pacifico';
+background:linear-gradient(135deg,#9b6bff,#ffb6ff);
+color:#2b003d;
+cursor:pointer;
+box-shadow:0 0 55px rgba(255,200,255,.9);
+transition:transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.secret-btn:hover{transform:scale(1.08); box-shadow:0 0 65px rgba(255,200,255,1);}
+
+/* WOW */
+#wow{
+position:fixed;inset:0;
+background:radial-gradient(circle,rgba(200,150,255,.95),rgba(20,0,40,.98));
+display:flex;align-items:center;justify-content:center;
+opacity:0;pointer-events:none;
+transition:opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);z-index:30;
+}
+#wow.show{opacity:1;pointer-events:auto}
+#wow .heart{
+font-size:130px;
+animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{50%{transform:scale(1.25)}}
+
+/* SECRET */
+#secret{
+position:fixed;inset:0;
+background:radial-gradient(circle,rgba(70,0,110,.96),rgba(0,0,0,.96));
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;
+opacity:0;pointer-events:none;
+transition:opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+z-index:40;padding:40px;
+}
+#secret.show{opacity:1;pointer-events:auto}
+
+/* elements in secret with stagger */
+#secret > * {
+opacity:0;
+transform:translateY(20px);
+transition:opacity 1.0s cubic-bezier(0.22, 1, 0.36, 1), transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#secret.show > *:nth-child(1) {
+opacity:1;
+transform:none;
+transition-delay:0.3s;
+}
+#secret.show > *:nth-child(2) {
+opacity:1;
+transform:none;
+transition-delay:0.6s;
+}
+#secret.show > *:nth-child(3) {
+opacity:1;
+transform:none;
+transition-delay:0.9s;
+}
+
+.close-btn{
+margin-top:50px;
+padding:16px 40px;
+border-radius:40px;
+border:none;
+font-size:18px;
+background:rgba(255,255,255,.18);
+color:#fff;
+cursor:pointer;
+transition:transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.close-btn:hover {
+transform:scale(1.05);
+background:rgba(255,255,255,.28);
+}
+
+/* FINAL */
+#final{
+position:fixed;inset:0;
+background:linear-gradient(180deg,#070015,#000);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+opacity:0;
+pointer-events:none;
+transition:opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+z-index:50;
+padding:40px;
+}
+#final.show{opacity:1;pointer-events:auto}
+#final p{
+font-size:26px;
+line-height:1.9;
+max-width:680px;
+}
+
+/* elements in final with stagger */
+#final > * {
+opacity:0;
+transform:translateY(20px);
+transition:opacity 1.0s cubic-bezier(0.22, 1, 0.36, 1), transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#final.show > *:nth-child(1) {
+opacity:1;
+transform:none;
+transition-delay:0.4s;
+}
+
+/* MUSIC MODAL */
+#musicModal{
+position:fixed;inset:0;
+background:rgba(10,0,25,.92);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+z-index:100;
+opacity:0;
+transition:opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#musicModal.show{opacity:1;}
+#musicModal .box{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+padding:40px;
+border-radius:30px;
+max-width:420px;
+box-shadow:0 0 60px rgba(200,150,255,.6);
+transform:scale(0.95);
+transition:transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#musicModal.show .box{transform:scale(1);}
+#musicModal button{
+margin:18px;
+padding:14px 30px;
+border-radius:40px;
+border:none;
+font-size:18px;
+cursor:pointer;
+transition:transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#musicModal button:hover {
+transform:scale(1.05);
+}
+.yes{background:#ffb6ff;color:#2b003d}
+.no{background:rgba(255,255,255,.15);color:#fff}
+
+/* music toggle */
+#musicToggle{
+position:fixed;
+right:18px;
+bottom:18px;
+font-size:26px;
+cursor:pointer;
+opacity:.7;
+z-index:60;
+transition:opacity 0.45s ease-in-out;
+}
+#musicToggle:hover{opacity:1}
+
+footer{padding:120px 20px;text-align:center;opacity:.75;font-size:20px;transition:opacity 1.2s ease-in-out;}
+footer.show{opacity:.75;}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<div id="musicModal" class="show">
+  <div class="box">
+    <p style="font-size:22px">
+      Хочешь, я включу<br>
+      тихую музыку для настроения? ✨
+    </p>
+    <button class="yes">Да, включи 🎧</button>
+    <button class="no">Потом</button>
+  </div>
+</div>
+
+<div id="musicToggle">🎧</div>
+
+<section>
+<h1>Айгерим 💜</h1>
+<p>
+Рад видеть тебя здесь.<br>
+С тобой мир становится теплее и мягче.
+</p>
+<div class="card">
+<p>
+Это тихое место —<br>
+немного о чувствах.<br>
+И немного о нас двоих.
+</p>
+</div>
+</section>
+
+<section>
+<h1>Она и котик</h1>
+<p>Нажми на него. Сначала он осторожный, как и ты иногда.</p>
+<div class="cat">🐱</div>
+<div id="mood"></div>
+</section>
+
+<section>
+<h1>И если честно...</h1>
+<p>
+Я не идеализирую тебя.<br>
+Мне просто нравится —<br>
+какая ты настоящая.
+</p>
+<button class="secret-btn">Хочу сказать 💜</button>
+</section>
+
+<footer>
+Твой Нурсултан<br>
+и шепот ночи ✨
+</footer>
+
+<div id="wow"><div class="heart">💜</div></div>
+
+<div id="secret">
+<h1>Айгерим</h1>
+<p>
+Иногда ты капризничаешь — и это так мило.<br><br>
+Даже когда молчишь — я слышу твои мысли.<br><br>
+А когда улыбаешься — мир замирает.
+</p>
+<button class="close-btn">бумм</button>
+</div>
+
+<div id="final">
+<p>
+Если вдруг сомневаешься —<br><br>
+<strong>я выбираю тебя.</strong><br>
+Спокойно. Искренне. Без лишних слов.
+</p>
+</div>
+
+<script>
+/* sections */
+const sections=document.querySelectorAll('section');
+const footer=document.querySelector('footer');
+sections.forEach(s=>new IntersectionObserver(e=>{
+e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('show');}});
+},{threshold:.25}).observe(s));
+new IntersectionObserver(e=>{
+if(e[0].isIntersecting) footer.classList.add('show');
+},{threshold:.1}).observe(footer);
+
+/* CAT */
+const cat=document.querySelector('.cat');
+const mood=document.getElementById('mood');
+let clicks=0;
+const moods=[
+"Ты иногда вредничаешь — и мне это нравится",
+"Ты милая, даже когда злишься",
+"Ты чувствуешь глубже, чем показываешь",
+"Ты особенная, как никто другой",
+"Я привык к тебе — и это счастье"
+];
+cat.onclick=()=>{
+clicks++;
+const f=document.createElement('div');
+f.className='flash';
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),700);
+mood.textContent=moods[Math.min(clicks-1,moods.length-1)];
+mood.classList.add('show');
+if(clicks>3) cat.textContent="😺";
+};
+
+/* wow / secret / final */
+const btn=document.querySelector('.secret-btn');
+const wow=document.getElementById('wow');
+const secret=document.getElementById('secret');
+const close=document.querySelector('.close-btn');
+const final=document.getElementById('final');
+
+btn.onclick=()=>{
+wow.classList.add('show');
+setTimeout(()=>{
+wow.classList.remove('show');
+secret.classList.add('show');
+},1600);
+};
+close.onclick=()=>{
+secret.classList.remove('show');
+setTimeout(()=>final.classList.add('show'),800);
+};
+final.onclick=()=>final.classList.remove('show');
+
+/* MUSIC */
+const music=document.getElementById('bgMusic');
+const modal=document.getElementById('musicModal');
+const yes=document.querySelector('.yes');
+const no=document.querySelector('.no');
+const toggle=document.getElementById('musicToggle');
+let playing=false;
+
+yes.onclick=()=>{
+music.volume=.25;
+music.play();
+playing=true;
+modal.style.display='none';
+};
+no.onclick=()=>modal.style.display='none';
+
+toggle.onclick=()=>{
+if(!playing){
+music.play();
+playing=true;
+}else{
+music.pause();
+playing=false;
+}
+};
+
+// Fade in music modal smoothly (already has transition)
+setTimeout(()=>modal.classList.add('show'), 300);
+</script>
+
+</body>
+</html>
